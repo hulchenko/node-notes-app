@@ -1,0 +1,23 @@
+{
+  "name": "notes-app",
+  "version": "1.0.0",
+  "description": "node notes-app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hulchenko/node-notes-app.git"
+  },
+  "author": "Vadym Hulchenko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hulchenko/node-notes-app/issues"
+  },
+  "homepage": "https://github.com/hulchenko/node-notes-app#readme",
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "validator": "^10.8.0"
+  }
+}
