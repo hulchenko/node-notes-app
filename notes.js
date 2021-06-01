@@ -1,4 +1,5 @@
 const fs = require('fs');
+const chalk = require('chalk');
 
 const getNotes = function () {
   return 'Test notes..';
@@ -7,6 +8,7 @@ const getNotes = function () {
 const addNote = function (title, body) {
   // command would load array of the existing notes(different notes var than in app.js)
   const notes = loadNotes();
+  console.log(notes);
   const duplicateNotes = notes.filter(function (note) {
     return note.title === title;
   });
@@ -21,6 +23,19 @@ const addNote = function (title, body) {
     console.log('New note was created!');
   } else {
     console.log('Note name already exists');
+  }
+};
+
+const removeNote = function (title) {
+  const notes = loadNotes();
+  const notesToKeep = notes.filter(function (note) {
+    return note.title !== title; // return all of the elements that DO NOT match filter search, thus removing it.
+  });
+  if (notes.length !== notesToKeep.length) {
+    console.log(chalk.green('Note has been removed!'));
+    saveNotes(notesToKeep); // overwrite existing array with the one with removed element
+  } else {
+    console.log(chalk.red("Note doesn't exist!"));
   }
 };
 
@@ -44,4 +59,5 @@ const loadNotes = function () {
 module.exports = {
   getNotes: getNotes,
   addNote: addNote,
+  removeNote: removeNote,
 };
