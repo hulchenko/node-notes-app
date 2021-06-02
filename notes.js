@@ -15,9 +15,9 @@ const addNote = (title, body) => {
       body: body,
     });
     saveNotes(notes);
-    console.log('New note was created!');
+    console.log(chalk.green('New note was created!'));
   } else {
-    console.log('Note name already exists');
+    console.log(chalk.red('Note name already exists'));
   }
 };
 
@@ -30,6 +30,12 @@ const removeNote = (title) => {
   } else {
     console.log(chalk.red("Note doesn't exist!"));
   }
+};
+
+const listNotes = () => {
+  console.log(chalk.blue('Listing notes!'));
+  const notes = loadNotes();
+  notes.forEach((i) => console.log(i.title));
 };
 
 const saveNotes = (notes) => {
@@ -53,4 +59,5 @@ module.exports = {
   getNotes: getNotes,
   addNote: addNote,
   removeNote: removeNote,
+  listNotes: listNotes,
 };
