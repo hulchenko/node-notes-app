@@ -1,17 +1,12 @@
 const fs = require('fs');
 const chalk = require('chalk');
 
-const getNotes = function () {
-  return 'Test notes..';
-};
+const getNotes = () => 'Test notes..';
 
-const addNote = function (title, body) {
+const addNote = (title, body) => {
   // command would load array of the existing notes(different notes var than in app.js)
   const notes = loadNotes();
-  console.log(notes);
-  const duplicateNotes = notes.filter(function (note) {
-    return note.title === title;
-  });
+  const duplicateNotes = notes.filter((note) => note.title === title);
 
   if (duplicateNotes.length === 0) {
     notes.push({
@@ -26,11 +21,9 @@ const addNote = function (title, body) {
   }
 };
 
-const removeNote = function (title) {
+const removeNote = (title) => {
   const notes = loadNotes();
-  const notesToKeep = notes.filter(function (note) {
-    return note.title !== title; // return all of the elements that DO NOT match filter search, thus removing it.
-  });
+  const notesToKeep = notes.filter((note) => note.title !== title); // return all of the elements that DO NOT match filter search, thus removing it.
   if (notes.length !== notesToKeep.length) {
     console.log(chalk.green('Note has been removed!'));
     saveNotes(notesToKeep); // overwrite existing array with the one with removed element
@@ -39,12 +32,12 @@ const removeNote = function (title) {
   }
 };
 
-const saveNotes = function (notes) {
+const saveNotes = (notes) => {
   const dataJSON = JSON.stringify(notes);
   fs.writeFileSync('notes.json', dataJSON);
 };
 
-const loadNotes = function () {
+const loadNotes = () => {
   // adds value to the existing array, does not overwrite it
   try {
     const dataBuffer = fs.readFileSync('notes.json');
