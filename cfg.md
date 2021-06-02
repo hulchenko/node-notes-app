@@ -5,3 +5,5 @@ npm i validator (strings validator)
 npm i chalk (terminal output logs styler)
 npm i -g nodemon (node auto refresh/run)(installed globally)
 npm i yargs (parsing command arguments)
+
+debugger (to run: node inspect app.js ..)
