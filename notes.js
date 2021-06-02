@@ -1,14 +1,13 @@
 const fs = require('fs');
 const chalk = require('chalk');
 
-const getNotes = () => 'Test notes..';
-
 const addNote = (title, body) => {
   // command would load array of the existing notes(different notes var than in app.js)
   const notes = loadNotes();
-  const duplicateNotes = notes.filter((note) => note.title === title);
+  const duplicateNote = notes.find((note) => note.title === title); //same as notes.filter, except it will stop an execution as soon as it finds a duplicate.
 
-  if (duplicateNotes.length === 0) {
+  if (!duplicateNote) {
+    //if no duplicate
     notes.push({
       // values come from arguments in addNote function
       title: title,
@@ -38,6 +37,18 @@ const listNotes = () => {
   notes.forEach((i) => console.log(i.title));
 };
 
+const readNote = (title) => {
+  const notes = loadNotes();
+  const note = notes.find((note) => note.title === title);
+
+  if (note) {
+    console.log(chalk.green(note.title));
+    console.log(note.body);
+  } else {
+    console.log(chalk.red(`Note doesn't exist`));
+  }
+};
+
 const saveNotes = (notes) => {
   const dataJSON = JSON.stringify(notes);
   fs.writeFileSync('notes.json', dataJSON);
@@ -56,8 +67,8 @@ const loadNotes = () => {
 };
 
 module.exports = {
-  getNotes: getNotes,
   addNote: addNote,
   removeNote: removeNote,
   listNotes: listNotes,
+  readNote: readNote,
 };

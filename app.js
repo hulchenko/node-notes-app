@@ -4,7 +4,7 @@ const chalk = require('chalk');
 const yargs = require('yargs');
 // node import
 const notes = require('./notes.js');
-const { listNotes } = require('./notes.js');
+const { readNote } = require('./notes.js');
 // ---
 
 // Customize yargs version
@@ -50,17 +50,23 @@ yargs.command({
 yargs.command({
   command: 'read',
   describe: 'Read a note',
-  handler() {
-    console.log('Reading a note');
+  builder: {
+    title: {
+      demandOption: true,
+      type: 'string',
+    },
+  },
+  handler(argv) {
+    //argv is to access the title argument
+    notes.readNote(argv.title);
   },
 });
-
 // Create list command
 yargs.command({
   command: 'list',
   describe: 'List a note',
   handler() {
-    listNotes();
+    notes.listNotes();
   },
 });
 
